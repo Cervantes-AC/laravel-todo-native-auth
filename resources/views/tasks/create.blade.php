@@ -193,8 +193,8 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="submit-btn">🎊 Create Task</button>
             <a href="{{ route('tasks.index') }}" class="cancel-btn">❌Cancel</a>
+            <button type="submit" class="submit-btn">🎊 Create Task</button>
         </div>
     </form>
 </div>

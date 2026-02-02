@@ -1,9 +1,24 @@
 @extends('layouts.app')
 
+{{-- 
+    Page Title
+    Sets the title of the page, used in the <title> tag of the layout.
+--}}
 @section('title', 'My Tasks')
 
 @section('content')
+{{-- 
+    Inline CSS styling specific to this "My Tasks" page. 
+    It includes styles for:
+        - Header section
+        - Task statistics cards
+        - Task grid and individual task cards
+        - Buttons for actions (toggle, edit, delete)
+        - Empty state display
+        - Responsive behavior for mobile
+--}}
 <style>
+    /* Header section containing the title and "Add Task" button */
     .tasks-header {
         display: flex;
         justify-content: space-between;
@@ -42,6 +57,7 @@
         box-shadow: 0 8px 25px rgba(201, 41, 42, 0.4);
     }
 
+    /* Stats section displaying total, pending, and completed tasks */
     .tasks-stats {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -82,11 +98,13 @@
         font-weight: 600;
     }
 
+    /* Grid layout for task cards */
     .tasks-grid {
         display: grid;
         gap: 1.5rem;
     }
 
+    /* Individual task card styling */
     .task-card {
         background: linear-gradient(135deg, #fffaf0 0%, #fff8dc 100%);
         padding: 1.8rem;
@@ -111,6 +129,7 @@
         box-shadow: 0 10px 30px rgba(201, 41, 42, 0.2);
     }
 
+    /* Completed task card */
     .task-card.completed {
         opacity: 0.75;
         border-left-color: #228b22;
@@ -120,6 +139,7 @@
         content: '✅';
     }
 
+    /* Header within each task card */
     .task-header {
         display: flex;
         justify-content: space-between;
@@ -135,11 +155,13 @@
         flex: 1;
     }
 
+    /* Style for completed task title */
     .task-card.completed .task-title {
         text-decoration: line-through;
         color: #666;
     }
 
+    /* Task status badges */
     .task-status {
         padding: 0.4rem 1.2rem;
         border-radius: 20px;
@@ -161,6 +183,7 @@
         border-color: #228b22;
     }
 
+    /* Task description */
     .task-description {
         color: #8b4513;
         margin-bottom: 1.5rem;
@@ -168,6 +191,7 @@
         font-size: 1.05rem;
     }
 
+    /* Meta info like creation date and time ago */
     .task-meta {
         display: flex;
         justify-content: space-between;
@@ -179,12 +203,14 @@
         border-top: 2px dashed #ffd700;
     }
 
+    /* Action buttons container */
     .task-actions {
         display: flex;
         gap: 0.8rem;
         flex-wrap: wrap;
     }
 
+    /* Common button styling */
     .btn {
         padding: 0.6rem 1.3rem;
         border: 2px solid;
@@ -197,6 +223,7 @@
         font-size: 0.95rem;
     }
 
+    /* Toggle complete button */
     .btn-toggle {
         background: linear-gradient(135deg, #228b22 0%, #006400 100%);
         color: white;
@@ -209,6 +236,7 @@
         box-shadow: 0 5px 15px rgba(34, 139, 34, 0.3);
     }
 
+    /* Edit button */
     .btn-edit {
         background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
         color: #8b4513;
@@ -221,6 +249,7 @@
         box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
     }
 
+    /* Delete button */
     .btn-delete {
         background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
         color: #ffd700;
@@ -233,6 +262,7 @@
         box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
     }
 
+    /* Empty state when no tasks exist */
     .empty-state {
         text-align: center;
         padding: 5rem 2rem;
@@ -264,6 +294,7 @@
         50% { transform: rotate(5deg); }
     }
 
+    /* Responsive adjustments */
     @media (max-width: 768px) {
         .tasks-header {
             flex-direction: column;
@@ -277,11 +308,13 @@
     }
 </style>
 
+{{-- Header with page title and "Add Task" button --}}
 <div class="tasks-header">
     <h1>🏮 My Tasks</h1>
     <a href="{{ route('tasks.create') }}" class="add-task-btn">✨ Add Task</a>
 </div>
 
+{{-- Task statistics cards --}}
 <div class="tasks-stats">
     <div class="stat-card">
         <h3>{{ $tasks->count() }}</h3>
@@ -297,10 +330,13 @@
     </div>
 </div>
 
+{{-- Task grid: displays all tasks if they exist --}}
 @if($tasks->count() > 0)
     <div class="tasks-grid">
         @foreach($tasks as $task)
+            {{-- Single task card --}}
             <div class="task-card {{ $task->completed ? 'completed' : '' }}">
+                {{-- Task header with title and status --}}
                 <div class="task-header">
                     <div class="task-title">{{ $task->title }}</div>
                     <span class="task-status {{ $task->completed ? 'status-completed' : 'status-pending' }}">
@@ -308,16 +344,20 @@
                     </span>
                 </div>
 
+                {{-- Optional task description --}}
                 @if($task->description)
                     <div class="task-description">{{ $task->description }}</div>
                 @endif
 
+                {{-- Meta info: creation date and time ago --}}
                 <div class="task-meta">
                     <span>📅 {{ $task->created_at->format('M d, Y') }}</span>
                     <span>🕒 {{ $task->created_at->diffForHumans() }}</span>
                 </div>
 
+                {{-- Task actions: toggle, edit, delete --}}
                 <div class="task-actions">
+                    {{-- Toggle complete/pending --}}
                     <form action="{{ route('tasks.toggle', $task->id) }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-toggle">
@@ -325,8 +365,10 @@
                         </button>
                     </form>
 
+                    {{-- Edit task --}}
                     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-edit">✏️ Edit</a>
 
+                    {{-- Delete task with confirmation --}}
                     <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline;" 
                           onsubmit="return confirm('Are you sure you want to permanently delete this?');">
                         @csrf
@@ -338,10 +380,11 @@
         @endforeach
     </div>
 @else
+    {{-- Empty state display when no tasks exist --}}
     <div class="empty-state">
         <div class="empty-lantern">🏮</div>
-        <h2> No tasks yet!</h2>
-        <p> Create your first Lantern Rite task!</p>
+        <h2>No tasks yet!</h2>
+        <p>Create your first Lantern Rite task!</p>
     </div>
 @endif
 @endsection

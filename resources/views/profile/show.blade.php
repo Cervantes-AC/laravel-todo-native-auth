@@ -157,7 +157,7 @@
         {{ strtoupper(substr($user->name, 0, 1)) }}
     </div>
     <h1>My Profile</h1>
-    <p>Manage your Lantern Rite account</p>
+    <p>Manage your Account</p>
 </div>
 
 <div class="profile-form">

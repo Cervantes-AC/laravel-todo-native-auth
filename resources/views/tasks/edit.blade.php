@@ -1,9 +1,24 @@
 @extends('layouts.app')
 
+{{-- 
+    Page Title
+    Sets the title of the page, used in the <title> tag of the layout.
+--}}
 @section('title', 'Edit Task')
 
 @section('content')
+{{-- 
+    Inline CSS styling specific to the "Edit Task" page.
+    Includes styles for:
+        - Header section
+        - Task form container
+        - Form fields (input, textarea, labels)
+        - Checkbox for task status
+        - Submit and cancel buttons
+        - Error messages and helper text
+--}}
 <style>
+    /* Header section with page title and subtitle */
     .edit-header {
         text-align: center;
         margin-bottom: 2.5rem;
@@ -23,6 +38,7 @@
         font-size: 1.1rem;
     }
 
+    /* Main form container */
     .task-form {
         max-width: 750px;
         margin: 0 auto;
@@ -34,6 +50,7 @@
         position: relative;
     }
 
+    /* Decorative icons in the corners of the form */
     .task-form::before {
         content: '🎋';
         position: absolute;
@@ -52,6 +69,7 @@
         opacity: 0.2;
     }
 
+    /* Individual form group styling */
     .form-group {
         margin-bottom: 1.8rem;
     }
@@ -64,6 +82,7 @@
         font-size: 1.2rem;
     }
 
+    /* Input and textarea fields */
     input, textarea {
         width: 100%;
         padding: 1.1rem;
@@ -80,6 +99,7 @@
         resize: vertical;
     }
 
+    /* Focus effect for form fields */
     input:focus, textarea:focus {
         outline: none;
         border-color: #c9292a;
@@ -87,6 +107,7 @@
         background: #ffffff;
     }
 
+    /* Error message styling */
     .error-text {
         color: #8b0000;
         font-size: 0.9rem;
@@ -94,6 +115,7 @@
         font-weight: bold;
     }
 
+    /* Checkbox group for task completion */
     .checkbox-group {
         display: flex;
         align-items: center;
@@ -117,12 +139,14 @@
         color: #8b4513;
     }
 
+    /* Form action buttons */
     .form-actions {
         display: flex;
         gap: 1.2rem;
         margin-top: 2.5rem;
     }
 
+    /* Submit and cancel buttons */
     .submit-btn, .cancel-btn {
         flex: 1;
         padding: 1.2rem;
@@ -137,6 +161,7 @@
         display: inline-block;
     }
 
+    /* Submit button styling */
     .submit-btn {
         background: linear-gradient(135deg, #c9292a 0%, #8b0000 100%);
         color: #ffd700;
@@ -149,6 +174,7 @@
         box-shadow: 0 8px 25px rgba(201, 41, 42, 0.4);
     }
 
+    /* Cancel button styling */
     .cancel-btn {
         background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
         color: #ffd700;
@@ -160,6 +186,7 @@
         box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
     }
 
+    /* Helper text under form fields */
     .helper-text {
         display: block;
         margin-top: 0.5rem;
@@ -169,16 +196,19 @@
     }
 </style>
 
+{{-- Header with page title and description --}}
 <div class="edit-header">
     <h1>✏️ Edit Task</h1>
     <p>Edit Your Lantern Rite Task</p>
 </div>
 
+{{-- Task edit form --}}
 <div class="task-form">
     <form action="{{ route('tasks.update', $task->id) }}" method="POST">
         @csrf
         @method('PUT')
 
+        {{-- Task title input --}}
         <div class="form-group">
             <label for="title">🏮 Task Title</label>
             <input type="text" id="title" name="title" value="{{ old('title', $task->title) }}" required>
@@ -188,6 +218,7 @@
             <span class="helper-text">Update your task title</span>
         </div>
 
+        {{-- Task description textarea --}}
         <div class="form-group">
             <label for="description">📝 Description</label>
             <textarea id="description" name="description">{{ old('description', $task->description) }}</textarea>
@@ -197,6 +228,7 @@
             <span class="helper-text">Add or modify task details</span>
         </div>
 
+        {{-- Task completion checkbox --}}
         <div class="form-group">
             <label>✅ Task Status</label>
             <div class="checkbox-group">
@@ -206,9 +238,10 @@
             </div>
         </div>
 
+        {{-- Form action buttons --}}
         <div class="form-actions">
             <button type="submit" class="submit-btn">💾 Update</button>
-            <a href="{{ route('tasks.index') }}" class="cancel-btn">❌  Cancel</a>
+            <a href="{{ route('tasks.index') }}" class="cancel-btn">❌ Cancel</a>
         </div>
     </form>
 </div>
