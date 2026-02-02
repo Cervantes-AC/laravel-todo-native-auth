@@ -8,44 +8,74 @@
         text-align: center;
         margin-bottom: 2.5rem;
         padding-bottom: 1.5rem;
-        border-bottom: 3px solid #667eea;
-    }
-
-    .profile-header h1 {
-        color: #333;
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
+        border-bottom: 3px solid #ffd700;
     }
 
     .profile-avatar {
-        width: 120px;
-        height: 120px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        width: 140px;
+        height: 140px;
+        background: linear-gradient(135deg, #c9292a 0%, #8b0000 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 3rem;
-        color: white;
-        margin: 0 auto 1rem;
+        font-size: 4rem;
+        color: #ffd700;
+        margin: 0 auto 1.5rem;
+        border: 5px solid #ffd700;
+        box-shadow: 0 10px 30px rgba(201, 41, 42, 0.3);
+        position: relative;
+    }
+
+    .profile-avatar::before {
+        content: '✨';
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        font-size: 2rem;
+    }
+
+    .profile-header h1 {
+        color: #c9292a;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(201, 41, 42, 0.1);
+    }
+
+    .profile-header p {
+        color: #8b4513;
+        font-size: 1.1rem;
     }
 
     .profile-form {
-        max-width: 600px;
+        max-width: 700px;
         margin: 0 auto;
     }
 
     .form-section {
-        background: #f8f9fa;
-        padding: 2rem;
-        border-radius: 15px;
+        background: linear-gradient(135deg, #fffaf0 0%, #fff8dc 100%);
+        padding: 2.5rem;
+        border-radius: 20px;
         margin-bottom: 2rem;
+        border: 4px solid #ffd700;
+        box-shadow: 0 10px 30px rgba(201, 41, 42, 0.2);
+        position: relative;
+    }
+
+    .form-section::before {
+        content: '🏮';
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 2rem;
+        opacity: 0.2;
     }
 
     .form-section h2 {
-        color: #667eea;
+        color: #c9292a;
         margin-bottom: 1.5rem;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        text-shadow: 1px 1px 2px rgba(201, 41, 42, 0.1);
     }
 
     .form-group {
@@ -55,53 +85,70 @@
     label {
         display: block;
         margin-bottom: 0.5rem;
-        color: #333;
-        font-weight: 600;
+        color: #8b4513;
+        font-weight: 700;
+        font-size: 1.1rem;
     }
 
     input {
         width: 100%;
-        padding: 0.9rem;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
+        padding: 1rem;
+        border: 3px solid #ffd700;
+        border-radius: 12px;
         font-size: 1rem;
         transition: all 0.3s;
+        background: #fffaf0;
     }
 
     input:focus {
         outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: #c9292a;
+        box-shadow: 0 0 0 4px rgba(201, 41, 42, 0.1);
+        background: #ffffff;
     }
 
     .error-text {
-        color: #e74c3c;
+        color: #8b0000;
         font-size: 0.85rem;
         margin-top: 0.3rem;
+        font-weight: bold;
     }
 
     .update-btn {
         width: 100%;
-        padding: 1rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.1rem;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #c9292a 0%, #8b0000 100%);
+        color: #ffd700;
+        border: 3px solid #ffd700;
+        border-radius: 15px;
+        font-size: 1.2rem;
         font-weight: bold;
         cursor: pointer;
-        transition: transform 0.2s;
+        transition: all 0.3s;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
 
     .update-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(201, 41, 42, 0.4);
+        background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
     }
 
     .help-text {
-        font-size: 0.85rem;
-        color: #666;
-        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        color: #b8860b;
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+
+    .section-divider {
+        background: linear-gradient(135deg, #fff8dc 0%, #fffacd 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        border-left: 5px solid #ffd700;
+        color: #8b4513;
+        font-weight: 600;
     }
 </style>
 
@@ -110,7 +157,7 @@
         {{ strtoupper(substr($user->name, 0, 1)) }}
     </div>
     <h1>My Profile</h1>
-    <p style="color: #666;">Manage your account information</p>
+    <p>Manage your Lantern Rite account</p>
 </div>
 
 <div class="profile-form">
@@ -121,7 +168,7 @@
             <h2>📋 Basic Information</h2>
             
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">👤 Full Name</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
                 @error('name')
                     <div class="error-text">{{ $message }}</div>
@@ -129,7 +176,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email">Email Address</label>
+                <label for="email">📧 Email Address</label>
                 <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                 @error('email')
                     <div class="error-text">{{ $message }}</div>
@@ -139,20 +186,23 @@
 
         <div class="form-section">
             <h2>🔒 Change Password</h2>
-            <p class="help-text" style="margin-bottom: 1rem;">Leave blank if you don't want to change your password</p>
+            <div class="section-divider">
+                💡 Leave blank to keep current password
+            </div>
 
             <div class="form-group">
-                <label for="password">New Password</label>
+                <label for="password">🔑 New Password</label>
                 <input type="password" id="password" name="password">
                 @error('password')
                     <div class="error-text">{{ $message }}</div>
                 @enderror
-                <div class="help-text">Minimum 6 characters</div>
+                <div class="help-text"> Minimum 6 characters</div>
             </div>
 
             <div class="form-group">
-                <label for="password_confirmation">Confirm New Password</label>
+                <label for="password_confirmation">🔐 Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation">
+                <div class="help-text"> Re-enter your new password</div>
             </div>
         </div>
 
