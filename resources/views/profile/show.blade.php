@@ -153,9 +153,12 @@
 </style>
 
 <div class="profile-header">
+    
     <div class="profile-avatar">
-        {{ strtoupper(substr($user->name, 0, 1)) }}
+        {{-- two images either images/Weird.png or images/profile.jpg --}}
+        <img src="{{ asset('images/Weird.png') }}" alt="Profile Image" style="width:100%; height:100%; border-radius:50%;">
     </div>
+
     <h1>My Profile</h1>
     <p>Manage your Account</p>
 </div>

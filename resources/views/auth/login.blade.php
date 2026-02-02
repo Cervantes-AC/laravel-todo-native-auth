@@ -71,6 +71,25 @@
             margin: 8px auto 0 auto;
         }
 
+        /* SESSION MESSAGES */
+        .session-message {
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .session-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .session-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
         /* FORM ELEMENTS */
         .form-group {
             margin-bottom: 18px;
@@ -165,6 +184,19 @@
     <!-- LOGIN CONTAINER -->
     <div class="login-container">
         <h2>Login</h2>
+
+        <!-- SESSION MESSAGES -->
+        @if(session('success'))
+            <div class="session-message session-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="session-message session-error">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <form action="/login" method="POST">
             @csrf
