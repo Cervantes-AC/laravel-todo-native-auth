@@ -25,6 +25,19 @@
         border: 5px solid #ffd700;
         box-shadow: 0 10px 30px rgba(201, 41, 42, 0.3);
         position: relative;
+        overflow: hidden;
+    }
+
+    .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.3s;
+    }
+
+    .profile-avatar:hover img {
+        transform: scale(1.05);
     }
 
     .profile-avatar::before {
@@ -151,12 +164,12 @@
         font-weight: 600;
     }
 </style>
-
 <div class="profile-header">
-    
     <div class="profile-avatar">
-        {{-- two images either images/Weird.png or images/profile.jpg --}}
-        <img src="{{ asset('images/Weird.png') }}" alt="Profile Image" style="width:100%; height:100%; border-radius:50%;">
+        {{-- Show user's avatar if exists, otherwise show a placeholder icon --}}
+        <img id="avatarPreview" 
+             src="{{ $user->avatar ? asset('storage/' . $user->avatar) : '' }}" 
+             alt="{{ $user->name }}'s Avatar">
     </div>
 
     <h1>My Profile</h1>
@@ -164,12 +177,25 @@
 </div>
 
 <div class="profile-form">
-    <form action="{{ route('profile.update') }}" method="POST">
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
+        <!-- Profile Image Upload -->
+        <div class="form-section">
+            <h2>🖼 Profile Image</h2>
+            <div class="form-group">
+                <label for="avatar">Upload Profile Image</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(event)">
+                @error('avatar')
+                    <div class="error-text">{{ $message }}</div>
+                @enderror
+                <div class="help-text">Choose a new profile picture (optional)</div>
+            </div>
+        </div>
+
+        <!-- Basic Information -->
         <div class="form-section">
             <h2>📋 Basic Information</h2>
-            
             <div class="form-group">
                 <label for="name">👤 Full Name</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
@@ -187,11 +213,10 @@
             </div>
         </div>
 
+        <!-- Change Password -->
         <div class="form-section">
             <h2>🔒 Change Password</h2>
-            <div class="section-divider">
-                💡 Leave blank to keep current password
-            </div>
+            <div class="section-divider">💡 Leave blank to keep current password</div>
 
             <div class="form-group">
                 <label for="password">🔑 New Password</label>
@@ -199,17 +224,28 @@
                 @error('password')
                     <div class="error-text">{{ $message }}</div>
                 @enderror
-                <div class="help-text"> Minimum 6 characters</div>
+                <div class="help-text">Minimum 6 characters</div>
             </div>
 
             <div class="form-group">
                 <label for="password_confirmation">🔐 Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation">
-                <div class="help-text"> Re-enter your new password</div>
+                <div class="help-text">Re-enter your new password</div>
             </div>
         </div>
 
         <button type="submit" class="update-btn">💾 Update Profile</button>
     </form>
 </div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const output = document.getElementById('avatarPreview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 @endsection
