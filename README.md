@@ -235,34 +235,28 @@ laravel-todo-native-auth/
 ## Screenshots
 
 ### Login Page
-*[Add screenshot of your login page here]*
+<img width="300" height="394" alt="Screenshot 2026-02-02 112704" src="https://github.com/user-attachments/assets/d1303cd5-0981-48a8-9fc6-60de3147c777" />
+
 
 ### Registration Page
-*[Add screenshot of your registration page here]*
+<img width="312" height="416" alt="Screenshot 2026-02-02 112709" src="https://github.com/user-attachments/assets/5ed2d05d-1e3d-4815-8498-6845a6eb4352" />
+
 
 ### Task Dashboard
-*[Add screenshot of your task list/dashboard here]*
+<img width="1287" height="814" alt="Screenshot 2026-02-02 112609" src="https://github.com/user-attachments/assets/70e6eb56-c6bb-43a7-966b-0f55e40f05d8" />
+
 
 ### Create Task
-*[Add screenshot of create task form here]*
+<img width="627" height="495" alt="Screenshot 2026-02-02 112633" src="https://github.com/user-attachments/assets/ce69e97b-b3b7-4d9e-96e1-3fdf7aa7ed11" />
+
 
 ### Edit Task
-*[Add screenshot of edit task form here]*
+<img width="635" height="570" alt="Screenshot 2026-02-02 112644" src="https://github.com/user-attachments/assets/72a37590-4bc0-40c9-9316-d762d637dd44" />
+
 
 ### User Profile
-*[Add screenshot of profile page here]*
+<img width="710" height="771" alt="Screenshot 2026-02-02 112623" src="https://github.com/user-attachments/assets/510d9f72-10d4-4175-a6e9-3b1be161aa19" />
 
-## Grading Criteria Compliance
-
-| Criteria | Points | Status |
-|----------|--------|--------|
-| Native Authentication Implementation | 20 | ✅ Complete |
-| User Profile Management | 15 | ✅ Complete |
-| To-Do CRUD Functionality | 25 | ✅ Complete |
-| MVC Structure and Flow | 20 | ✅ Complete |
-| UI Design and Uniqueness | 15 | ✅ Complete |
-| GitHub Repository and Commits | 5 | ✅ Complete |
-| **Total** | **100** | ✅ **Complete** |
 
 ## Challenges Faced and Solutions
 
